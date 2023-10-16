@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="new.css">
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <div class="inputdata">
+                <p>Add Activity</p>
+            </div>
+            <div class="form-container">
+                <p>Activity</p>
+                <input type="text" name="input" id="activityInput">
+                <button type="button" class="btn-add" id="addButton">Add</button>
+            </div>
+            <div class="inputdata" style="background: #6499E9; margin-top: 20px;">
+                <p>List Activities</p>
+            </div>
+            <div class="form-container">
+                <ul id="newList">
+                </ul>
+            </div>
+        </form>
+    </div>
+    <script>
+        let addButton = document.getElementById("addButton");
+        addButton.addEventListener("click", () => {
+            let activityInput = document.getElementById("activityInput");
+            let activityText = activityInput.value;
+
+            if (activityText.trim() !== "") {
+                let content = document.createElement("div");
+
+                let newList = document.getElementById("newList");
+
+                let listItem = document.createElement("li");
+                listItem.textContent = activityText;
+                content.appendChild(listItem);
+
+                let editbutton = document.createElement("button");
+                editbutton.innerHTML = "Edit";
+                editbutton.className = "btn-edit";
+                content.appendChild(editbutton);
+
+                let delbutton = document.createElement("button");
+                delbutton.innerHTML = "Delete";
+                delbutton.className = "btn-del";
+                content.appendChild(delbutton);
+
+                editbutton.addEventListener("click", function () {
+                    event.preventDefault();
+                    let change_name = prompt("Edit Value: ");
+                    if (change_name != "") {
+                        listItem.textContent = change_name;
+                    }
+                });
+
+                delbutton.addEventListener("click", function () {
+                    content.remove();
+                });
+
+                newList.appendChild(content);
+
+                activityInput.value = ""; // Mengosongkan input setelah ditambahkan
+            }
+        });
+
+    </script>
+</body>
+
+</html>
